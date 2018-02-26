@@ -1,0 +1,107 @@
+.c-profile-edit{
+	max-width: 600px;
+	margin: auto;
+	margin-top: 2.5rem;
+	padding: 0 7rem;
+	@include breakpoint(desktop){
+		margin-bottom: 5rem;
+		padding: 0;
+	}
+	&__top{
+		text-align: center;
+		margin-bottom: 4.7rem;
+		position: relative;
+		@include breakpoint(desktop){
+			margin-bottom: 4rem;
+		}
+		&__title{
+			font-size: 26px;
+    		margin-bottom: 2.6rem;
+    		display: none;
+			@include breakpoint(desktop){
+				display: block;
+    			margin-bottom: 1.6rem;
+			}
+		}
+		&__img{
+			background:black;
+			border-radius: 100%;
+			width: 87px;
+			height: 87px;
+			margin: auto;
+			margin-bottom: 2.6rem;
+			img{
+				border-radius: 100%;
+				margin: auto;
+			}
+			@include breakpoint(desktop){
+				margin-bottom: 2.2rem;
+				width: 220px;
+				height: 220px;
+			}
+		}
+		&__change{
+        	@include font-size(10,20);    
+    		font-family: Roboto;
+    		display: inline-block;
+		    background: #232429;
+		    color: white;
+		    border-radius: 11px;
+		    padding: 6px 8px;	
+			@include breakpoint(desktop){
+				padding: 0;
+				background: transparent;
+				color: #232429;
+				border-radius: 0;
+			}		
+		}
+	}
+	&__input{
+		width: 100%;
+		padding: 6px 0;
+		margin-bottom: 43px;
+		border: 0;
+		border-bottom: 1px solid #95989A;
+        @include font-size(14,20);   
+		font-family: Roboto;
+		@include breakpoint(desktop){
+			margin-bottom: 2.4rem;
+		}	
+		&--radio{
+			border-bottom: 0;
+		}
+		&.error{
+			color: red;
+			border-color: red;
+		}
+	}
+	&__logout{
+		@extend .c-profile-edit__input;
+		background: transparent;
+		text-align: left;
+		color: #FF0000;
+	}
+	&__submit{
+		border-radius: 20px;
+		background: #232429;
+		border: 0;
+		padding: 6px 16px;
+		color: white;
+		font-size: 20px;
+		font-family: Roboto;
+		text-align: center;
+		margin-top: 0.7rem;
+		display: none;
+		@include breakpoint(desktop){
+			display: block;
+		}
+	}
+
+	.spinner{
+		position: absolute;
+	    bottom: 0;
+	    left: 0;
+	    right: 0;
+	    margin: auto;
+	}
+}

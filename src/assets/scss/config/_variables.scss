@@ -1,0 +1,22 @@
+//-------------------------
+//----------------VARIABLES
+//-------------------------
+
+//-----COLORS
+$colorWhite: #FFF;
+$colorBlack: #000;
+$colorRed  : #F00;
+$colorGreen: #09f3a2;
+$colorBlue : #00F;
+$colorMain : $colorWhite;
+
+
+//-----PATHS
+$fontBaseUrl   : "http://static1.webedia.fr/fonts/";
+$localFontBase : "../fonts/";
+$imgBaseUrl    : "/web/skins/default/";
+$imgUrl    : "/src/assets/img/";
+
+//------FONTS
+$fontDefault     : Helvetica, Arial, sans-serif;
+$baseFont        : "Helvetica", $fontDefault;

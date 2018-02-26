@@ -1,0 +1,69 @@
+.b-comments{
+	&__content{
+		width: 100%;
+	    background: white;
+	    position: relative;
+	    margin: auto;
+	    min-height: 100%;
+	    @include breakpoint(desktop){
+	    	height: 100%;
+	    	width: 90%;
+	    	max-width: 570px;
+	    	margin-top: 4rem;
+	    	height: auto;
+	    	min-height: auto;
+	    }
+	}
+	&--outer{
+		max-height: 90vH;
+		overflow: scroll;
+	    @include breakpoint(desktop){
+			//height: 200px;
+	    }
+	}
+	&--inner{
+		padding: 3rem 2.1rem;
+	}
+	&__single{
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 2rem;
+		&--left{
+			display: flex;
+			width: 70%;
+		}
+		&--right{
+			width: 30%;
+			display: flex;
+    		align-items: center;
+			img{
+				margin-left: auto;
+			}
+		}
+	}
+	&__img{
+		width: 44px;
+	    height: 44px;
+	    border-radius: 100%;
+	    background: black;
+		img{
+			border-radius: 100%;
+		}
+	}
+	&__txt{
+		width: calc(100% - 44px);
+		padding-top: 0.5rem;
+    	padding-left: 0.7rem;
+		span{
+			font-family: RobotoBold;
+		}
+	}
+
+	&__form{
+		margin-bottom: 2rem;
+		.c-profile-edit__submit{
+			margin: auto;
+			margin-top: -1rem;
+		}
+	}
+}

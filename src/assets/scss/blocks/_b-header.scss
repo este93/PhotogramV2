@@ -1,0 +1,132 @@
+//-------------------------
+//-------------------HEADER
+//-------------------------
+.b-header {
+	display: flex;
+	justify-content: space-between;	
+    align-items: center; 
+    padding: .8rem 1.4rem .8rem 1.4rem;
+    position: fixed;
+    bottom: 0;
+    background: white;
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    border-top: 1px solid rgba(149, 152, 154, 0.5);
+    z-index: 3;
+    height: 47px;
+    @include breakpoint(desktop){
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #232429;
+        padding: 0.8rem 3.8rem 0.6rem 3.8rem;  
+        bottom: auto;
+        top: 0;
+        height: auto;
+    }
+    .header-like{
+        display: none;
+        @include breakpoint(desktop){
+            display: inline-block;
+        }
+    }
+    .header-upload{
+        display: none;
+        @include breakpoint(desktop){
+            display: inline-block;
+        }
+        &--mob{
+            display: inline-block;
+            @include breakpoint(desktop){
+                display: none;
+            }
+        }
+    }
+    &-wrap{
+        position: fixed;
+        width: 100%;
+        top: 0;
+        background: white;
+        z-index: 2;        
+    }
+    &--mobile{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid rgba(149, 152, 154, .5);
+        height: 47px;
+        @include breakpoint(desktop){
+            display: none;
+        }
+    }
+    &--left{
+        width: 100%;
+        ul{
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+        }
+        li{            
+            display: inline-block;
+            margin-right: 1rem;
+            max-width: 30px;
+            &:last-child{
+                margin-right: 0;
+            }
+            img{
+                border-radius: 100%;
+                max-height: 30px;
+            }
+            @include breakpoint(desktop){
+                max-width: 39px;
+                margin-right: 2.2rem;
+                img{
+                    max-height: 39px;
+                }
+            }
+        }
+        @include breakpoint(desktop){
+            width: auto;
+        }
+    }
+    &--center{
+        margin-left: -9rem;
+        top: -0.3rem;
+        position: relative;
+        display: none;
+        @include breakpoint(desktop){
+            display: block;
+        }
+    }
+    &--right{
+        display: none;
+        @include breakpoint(desktop){
+            display: flex;
+            align-items: center;
+        }
+    }
+    &__language{
+        font-family: RobotoBold;
+        margin-left: 2.5rem;
+        font-size: 20px;
+    }
+    &__title{
+    	font-family: Helvetica;
+        @include font-size(26,55);        
+        @include line-height(26,55)
+    	color: #232429;
+        letter-spacing: -0.05rem;
+    	span{
+    		font-family: HelveticaThin;
+    	}
+        @include breakpoint(desktop){
+            letter-spacing: 0.01rem;
+        }
+    }
+
+    &__submenu{
+        
+    }
+}

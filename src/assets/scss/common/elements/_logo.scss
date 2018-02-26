@@ -1,0 +1,13 @@
+.logo{
+  @include font-size-rem(88, 80);
+  text-transform: lowercase;
+  text-align: center;
+  font-family: HelveticaThin;
+  &__white{
+    color: $colorWhite;
+    @extend .logo;
+  }
+  span{
+    font-family: Helvetica;
+  }
+}

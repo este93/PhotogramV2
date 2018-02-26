@@ -1,0 +1,48 @@
+.p-terms{
+	.b-header__title{
+	    @include font-size(24, 55);
+	}
+	.b-header{
+		display: none;
+	}
+	&--inner{
+		margin-top: 22px;
+    	padding: 0px 35px;
+		margin-bottom: 50px;
+		@include breakpoint(desktop){
+			margin: auto;
+		    margin-top: -13px;
+		    max-width: 686px;
+		    margin-bottom: 50px;
+		}
+	}
+	p{		
+	    font-family: Roboto;
+	    @include font-size(14, 20);
+	    @include line-height(16, 24);
+	    margin-bottom: 15px;
+		@include breakpoint(desktop){
+			margin-bottom: 24px;
+			color: #95989A;
+		}
+	}
+	&__title{
+		display: none;
+		@include breakpoint(desktop){
+			display: block;
+			font-size: 40px;
+			font-family: Helvetica;
+			margin-bottom: 50px;
+			color: #232429;
+		}
+	}
+	&__back{
+		display: none;
+		@include breakpoint(desktop){
+			display: block;
+			font-size: 20px;
+			font-family: Helvetica;
+			color: #232429;
+		}
+	}
+}

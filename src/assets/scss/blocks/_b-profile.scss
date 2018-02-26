@@ -1,0 +1,179 @@
+.b-profile{
+	&__top{
+		margin: auto;
+		margin-top: 2rem;
+		border-bottom: 1px solid rgba(149, 152, 154, 0.5);
+		padding-bottom: 2.5rem;
+		@include breakpoint(desktop){
+			margin-top: 30px;
+			border: 0;
+			max-width: 380px;
+			padding-bottom: 0.8rem;
+		}
+		&__name{
+			font-size: 20px;
+			margin-bottom: 1rem;
+    		font-family: Helvetica Neue;
+    		display: none;
+    		margin-left: 57px;
+			@include breakpoint(desktop){
+				display: block;
+			}
+		}
+		&__content{
+			overflow: hidden;
+			margin: auto;
+			margin-bottom: 3rem;
+			max-width: 225px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			@include breakpoint(desktop){
+				margin-bottom: 2.8rem;
+				max-width: 300px;
+			}
+		}
+		&--left{
+			float: left;
+			width: 87px;
+			margin-right: 13px;
+		}
+		&--right{
+			float: left;
+		    margin-right: 12px;
+			margin-top: 7px;
+			p{
+				font-family: Roboto;
+				margin-bottom: 15px;
+        		@include font-size(14,20);  
+				span{
+					color: #09F3A2;
+					margin-right: 2px;
+    				min-width: 30px;
+				    display: inline-block;
+					@include breakpoint(desktop){
+    					min-width: 44px;
+					}
+				}
+				&:last-child{
+					margin-bottom: 0;
+				}
+			}
+		}
+		&__img{
+			width: 87px;
+			height: 87px;
+			background: black;
+			border-radius: 100%;
+			overflow: hidden;
+			@include breakpoint(desktop){
+				width: 125px;
+				height: 125px;
+			}
+		}
+		&__info{
+			font-family: Roboto;
+			margin: auto;
+			margin-bottom: 3.3rem;
+        	@include font-size(14,20); 
+        	padding: 0 28px; 
+        	max-width: 400px;
+			@include breakpoint(desktop){
+				padding: 0;
+				margin-bottom: 3rem;
+			}
+		}
+		&__edit{
+			border-radius: 20px;
+			background: #D2D2D3;
+			border: 0;
+			padding: 6px 16px;
+			color: white;
+        	@include font-size(10,20); 
+			font-family: Roboto;
+			display: block;
+			text-align: center;
+			max-width: 92px;
+			margin: auto;
+			@include breakpoint(desktop){
+				max-width: 128px;
+			}
+		}
+	}
+
+	&__grid{
+		text-align: center;
+		margin-top: 1.2rem;
+		text-align: left;
+    	padding: 0 2rem;
+    	button{
+    		width: 20px;
+    		margin-right: 2px;
+    	}
+		@include breakpoint(desktop){
+			text-align: center;
+	    	button{
+	    		width: 25px;
+	    	}
+		}
+	}
+
+	&--follow{
+		background: #232429;
+	}
+
+	.b-photos{
+		margin-top: 1rem;
+		@include breakpoint(desktop){
+			margin-top: 3.5rem;
+		}
+	}
+	
+	.o-photo{
+		&__head{
+			display: none;
+		}
+	}
+
+	&--grid{
+		@include breakpoint(xmedium){
+			.b-photos{
+				max-width: 435px;
+	    		margin: auto;
+				margin-top: 1rem;
+				flex-flow: wrap;
+				justify-content: normal;
+				&>.o-photo{
+					width: calc(33% - 0.1%);
+				    margin-right: 0.6%;
+				    margin-bottom: 0.6%;
+				    margin-left: 0;
+					&>div:not(.o-photo__img){
+						display: none;
+					}
+					&:nth-child(3n){
+						margin-right: 0;
+					}
+				}			
+			}				
+		}	
+	}
+
+	&--photo{
+		.b-photos{
+			display: block;
+		}
+		.o-photo{
+			width: 100%;
+			max-width: 320px;
+			margin: auto;
+			margin-bottom: 2rem;
+			&>div:not(.o-photo__head){
+				display: block;
+			}
+			&__head{
+				display: none;
+			}
+		}
+	}
+}

@@ -1,0 +1,26 @@
+.btn{
+  background: $colorGreen;
+  color: $colorWhite;
+  border-radius: 5rem;
+  font-family: Roboto;
+  -moz-transition:    .3s all ease-in;
+  -o-transition:      .3s all ease-in;
+  -webkit-transition: .3s all ease-in;
+  transition:         .3s all ease-in;
+  outline: none;
+  border: 0;
+  @include font-size(10,20)
+  padding: 6px 16px;
+  &--small{
+  	width: auto;
+  	font-size: 16px;
+  	background: white;
+  	color: #232429;
+  	text-transform: none;
+  	font-weight: normal;
+  }
+  &--dark{
+    background:#232429;
+    
+  }
+}

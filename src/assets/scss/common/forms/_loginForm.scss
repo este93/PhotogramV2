@@ -1,0 +1,71 @@
+.login{
+  padding: 2.4rem 2rem;
+  @include breakpoint(desktop){
+    padding: 2.4rem 3.3rem;
+  }
+  &_back{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &__lang{
+    text-align: right;
+    color: white;
+    text-transform: uppercase;
+    @include font-size(10, 20);
+    font-family: RobotoBold;
+    margin-bottom: 4.45rem;
+    margin-bottom: 4vH;
+    @include breakpoint(desktop){
+      margin-bottom: 3.65rem;
+    }
+  }
+  &__holder{
+    position: relative;
+    z-index: 10;
+  }
+  input{
+    background: none;
+    color: $colorWhite;
+    border-bottom: 1px solid $colorWhite;
+    border-radius: 0;
+    &::placeholder{
+      color: $colorWhite;
+    }
+  }
+  .forgotPassword{
+    color: $colorWhite;
+    display: block;
+    font-weight: lighter;
+    @include font-size(10, 16);
+    margin-top: -2rem;
+    position: relative;
+    @include breakpoint(desktop){
+      margin-top: -2.5rem;
+    }
+  }
+  .btn{
+    margin-top: 13rem;
+        margin-top: 10.7vH;
+    text-transform: uppercase;
+    padding: 1rem 0;
+    @include font-size(14, 20);
+    font-family: RobotoBold;
+    width: 100%;
+    @include breakpoint(desktop){
+      margin-top: 22vH;
+      padding: 0.6rem 0;
+    }
+    &:hover{
+      color: $colorBlack;
+    }
+  }
+  .switchLogin{
+    color: $colorWhite;
+  }
+  .icon{
+    color: $colorWhite;
+  }
+}

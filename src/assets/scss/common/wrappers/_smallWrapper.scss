@@ -1,0 +1,11 @@
+.wrapper{
+	&-inner{
+		padding-bottom: 5rem;
+		@include breakpoint(desktop){
+			width: 90%;
+			max-width: 1500px;
+			margin: auto;		
+			padding-bottom: 0;	
+		}
+	}
+}

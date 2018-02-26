@@ -1,0 +1,131 @@
+.form{
+  margin-top: 13rem;
+      margin-top: 11.7vH;
+  padding: 0 5rem;
+  @include breakpoint(desktop){
+    max-width: 515px;
+    margin: auto;
+    margin-top: 22.4vH;
+  }
+  &__input{
+    position: relative;
+    margin-bottom: 48px;
+    @include breakpoint(desktop){
+      margin-bottom: 4rem;
+    }
+    input{
+      border: 0;
+      border-bottom: 1px solid $colorBlack;
+      width: 100%;
+      padding-bottom: 0.8rem;
+      color: $colorBlack;
+      outline: none;
+      @include font-size(16, 20);
+      padding-left: 32px;
+      position: relative;
+      border-radius: 0;
+      &::placeholder{
+        color: $colorBlack;
+      }
+      @include breakpoint(desktop){
+        padding-bottom: 8px;
+        padding-left: 43px;
+      }
+    }
+    .icon{
+      position: absolute;
+      left: 0;
+      top: 0rem;
+      z-index: 1;
+      width: 20px;
+      height: 20px;
+      @include breakpoint(desktop){
+        width: 30px;
+        height: 30px;
+        top: -0.3rem;
+      }
+    }
+  }
+  &__errors{
+    color: #EF0E0E;
+    font-family: Roboto;
+    @include font-size(10, 16);
+    margin-top: 8px;
+    display: block;
+    position: absolute;
+  }
+  .terms{
+    @include font-size(10, 16);
+    margin-bottom: 24px;
+    span{
+      color: $colorGreen;
+    }
+  }
+}
+.switchLogin{
+  text-align: center;
+  margin-top: 2rem;
+  @include font-size(10, 20);
+  a{
+    color: $colorGreen;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+}
+
+.register{
+  position: relative;
+  z-index: 1;
+  padding: 2.4rem 2rem;
+  .login__lang{
+    color: black;
+  }
+  .form {
+    margin-top: 4rem;
+    padding: 0 5rem;
+    @include breakpoint(desktop){
+      margin-top: 9.6rem;
+    }
+  }
+  .btn{
+    text-transform: uppercase;
+    padding: 1rem 0;
+    width: 100%;
+    &:hover{
+      color: $colorBlack;
+    }    
+    @include breakpoint(desktop){
+      padding: 0.6rem 0;
+    }
+  }
+  .form__input .icon{
+    @include breakpoint(desktop){
+      width: 26px;
+      height: 26px;
+    }
+  }
+  .form__input{
+    @include breakpoint(desktop){
+      margin-bottom: 4rem;
+    }
+  }
+}
+
+.username-taken{
+  margin: 20px 0;
+  position: relative;
+}
+
+.registration__confirm{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: white;
+    text-align: center;
+    font-size: 16px;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

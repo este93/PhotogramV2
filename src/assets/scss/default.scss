@@ -1,0 +1,36 @@
+/*------------------------------------------------------------------------------
+*    CSS Document (http://www.w3.org/Style/CSS/)
+*    For STYLEGUIDE, reffer to /config/_styleguide.scss
+-----------------------------------------------------------------------------*/
+
+//------ALL VARIABLES
+@import 'config/variables';
+
+//------MIXINS
+@import 'mixins/breakpoints';
+@import 'mixins/fontSize';
+
+//------COMMON
+@import 'lib/animate';
+@import 'lib/svg-icons';
+
+//------MAIN CONFIG
+@import 'config/reset';
+@import 'config/baseConfig';
+@import 'config/typography';
+//@import 'config/helpers';
+
+//------COMMON
+@import 'common/common';
+
+//------BLOCKS
+@import 'blocks/b-header';
+@import 'blocks/b-photos';
+@import 'blocks/b-profile';
+@import 'blocks/b-upload';
+@import 'blocks/b-notifications';
+@import 'blocks/b-comments';
+
+//------PAGES
+@import 'pages/p-profile';
+@import 'pages/p-terms';

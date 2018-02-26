@@ -1,0 +1,73 @@
+//----- Font Size
+
+// px Font Size
+@mixin font-size($fz-mobile, $fz-desktop) {
+  font-size: #{$fz-mobile}px;
+  @include breakpoint(mobile) {
+    font-size: #{$fz-mobile}px;
+  }
+  @include breakpoint(desktop){
+    font-size: #{$fz-desktop}px;
+  }
+}
+
+// rem Font Size
+@mixin font-size-rem($fz-mobile, $fz-desktop) {
+  @include breakpoint(mobile) {
+    font-size: cr($fz-mobile);
+  }
+  @include breakpoint(desktop){
+    font-size: cr($fz-desktop);
+  }
+}
+
+// vw Font Size for HTML
+@mixin font-size-vw($fz-mobile, $fz-desktop) {
+  //font-size: 16px;
+  @include breakpoint(mobile) {
+    font-size: cvw($fz-mobile, 640);
+  }
+  @include breakpoint(desktop){
+    font-size: cvw($fz-desktop, 1920);
+  }
+}
+
+
+
+
+// px Line-Height
+@mixin line-height($fz-mobile, $fz-desktop) {
+  @include breakpoint(mobile) {
+    line-height: #{$fz-mobile}px;
+  }
+  @include breakpoint(desktop) {
+    line-height: #{$fz-desktop}px;
+  }
+}
+
+// rem Line-Height
+@mixin line-height-rem($fz-mobile, $fz-desktop) {
+  @include breakpoint(mobile) {
+    line-height: cr($fz-mobile);
+  }
+  @include breakpoint(desktop) {
+    line-height: cr($fz-desktop);
+  }
+}
+
+
+//----- Calc px to vw
+@function cvw($target, $container) {
+  @return ($target / $container) * 100vw;
+}
+
+//-----  Calc px to rem
+@function cr($size) {
+  $remSize: $size / 16;
+  @return #{$remSize}rem;
+}
+
+//-----  Calc px to %
+@function cp($target, $container) {
+  @return ($target / $container) * 100%;
+}
