@@ -27,12 +27,9 @@
 
 <script>
 import {forgotPassword} from '../../config'
-import toastr from 'toastr'
-import Vue from 'vue'
-var SimpleVueValidation = require('simple-vue-validator');
-var Validator = SimpleVueValidation.Validator;
 
-Vue.use(SimpleVueValidation);
+import Vue from 'vue'
+
 
 export default {
     data(){

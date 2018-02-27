@@ -3,6 +3,7 @@
   text-transform: lowercase;
   text-align: center;
   font-family: HelveticaThin;
+  font-display: swap;
   &__white{
     color: $colorWhite;
     @extend .logo;

@@ -38,12 +38,9 @@
 
 <script>
 import {resetPassword, getHeader} from '../../config'
-import toastr from 'toastr'
-import Vue from 'vue'
-var SimpleVueValidation = require('simple-vue-validator');
-var Validator = SimpleVueValidation.Validator;
 
-Vue.use(SimpleVueValidation);
+import Vue from 'vue'
+
 
 function getParameterByName(name, url) { if (!url) { url = window.location.href; } name = name.replace(/[\[\]]/g, "\\$&"); var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"), results = regex.exec(url); if (!results) return null; if (!results[2]) return ''; return decodeURIComponent(results[2].replace(/\+/g, " ")); }
 const getToken = getParameterByName('token')

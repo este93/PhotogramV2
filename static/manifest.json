@@ -1,6 +1,6 @@
 {
-  "name": "photogram-pwa",
-  "short_name": "photogram-pwa",
+  "name": "photogram",
+  "short_name": "photogram",
   "icons": [
     {
       "src": "/static/img/icons/photogram-chrome-192x192.png",

@@ -2,8 +2,9 @@
     <div class="b-profile" id="dashboard-wrapper">
         <app-header></app-header>
         <div class="wrapper-inner">
-
             <div class="b-profile__top" v-if="user">
+                <!-- <router-link class="btn" to="/camera">Take photo</router-link> -->
+                <button @click="takePhoto = !takePhoto" class="btn">Take Photo</button>
                 <h3 class="b-profile__top__name">{{ user.username }}</h3>
                 <div class="b-profile__top__content">                
                     <div class="b-profile__top--left">
@@ -40,6 +41,8 @@
                 <photo></photo>                
             </div>
 
+            <takePhoto v-show="takePhoto"></takePhoto>    
+
         </div>       
     </div>
 </template>
@@ -47,15 +50,18 @@
 <script>
     import {apiDomain, getHeader, userUrl} from './../config'
     import Photo from '../components/Photo.vue'
+    import takePhoto from '../components/CameraView.vue'
     import { mapGetters } from 'vuex'
 
     export default{
         components: {
-            Photo
+            Photo,
+            takePhoto
         },
         data(){
             return{
-                personalPage: ''
+                personalPage: '',
+                takePhoto: false
             }            
         },
         created(){

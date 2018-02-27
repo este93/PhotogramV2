@@ -211,10 +211,9 @@
 		top: 50%;
 		transform: translateY(-50%);
 		display: none;
-		color: white;
-		font-family: Roboto;
-		font-size: 20px;
 		width: 20px;
+		background: transparent;
+    	border: 0;
 		&.right{
 			left: auto;
 			right: -30px;

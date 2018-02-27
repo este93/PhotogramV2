@@ -30,7 +30,6 @@
 <script>
 
   import {apiDomain, getHeader, userUrl, registerUrl} from '../config'
-  import toastr from 'toastr'
 
   export default{
     data(){
@@ -64,7 +63,8 @@
      padding-top: 0;
   }
   .login_back{
-    background: url(../assets/img/background.jpg);   
+    background: url(../assets/img/background.jpg) no-repeat;  
+    background-size: cover; 
   }
   .login_back:after{
     position: absolute;

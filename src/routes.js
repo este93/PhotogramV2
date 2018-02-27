@@ -3,13 +3,16 @@ const App = () => import('./App')
 import ForgotPassword from './pages/forgotPassword/ForgotPassword'
 import ResetPassword from './pages/forgotPassword/ResetPassword'
 //import DashboardPage from './pages/DashboardPage'
-const DashboardPage = () => import('./pages/DashboardPage')
+//const DashboardPage = () => import('./pages/DashboardPage')
+const DashboardPage = resolve => require(['./pages/DashboardPage'], resolve)
+
 //import HomePage from './pages/HomePage'
 const HomePage = () => import('./pages/HomePage')
 import ProfileEdit from './pages/ProfileEdit'
 import Search from './pages/Search'
 import Notifications from './pages/Notifications'
 import Terms from './pages/Terms'
+import CameraView from './components/CameraView'
 
 export default[
 	{path: '/', component: App, name:'landing'},
@@ -21,6 +24,7 @@ export default[
     {path: '/notifications', component: Notifications, meta: { requiresAuth: true}, name:'notifications'},
     {path: '/search', component: Search, meta: { requiresAuth: true}, name:'search'},
     {path: '/terms', component: Terms, name:'terms'},
+    {path: '/camera', component: CameraView, name:'camera'}
 ]
 
 

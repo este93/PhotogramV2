@@ -7,15 +7,15 @@ import { routerHistory, writeHistory } from 'vue-router-back-button'
 import Routes from './routes.js'
 import Header from './components/Header'
 import {store} from './store/index'
+window.$ = window.jQuery = require('jquery')
 
 require('./assets/scss/default.scss')
 
 var token = JSON.parse(window.localStorage.getItem('authUser'));
 
+// Axios
 window.axios = require('axios');
-
 axios.defaults.baseURL = "http://192.168.0.154:8000/api/";
-
 if(token){
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token.access_token;
 }
@@ -58,6 +58,6 @@ new Vue({
         }
         this.$store.commit('resetIcons')
         this.$store.commit('headerCloseAll')
-        this.$store.commit('setMobile');
+        this.$store.commit('setMobile')
     }
 })
