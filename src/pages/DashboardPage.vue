@@ -4,7 +4,8 @@
         <div class="wrapper-inner">
             <div class="b-profile__top" v-if="user">
                 <!-- <router-link class="btn" to="/camera">Take photo</router-link> -->
-                <button @click="takePhoto = !takePhoto" class="btn">Take Photo</button>
+                <button v-on:click='logout' class="b-profile__top--logout">Logout</button>
+                <button @click="takePhoto = !takePhoto" class="b-profile__top--camera">Take Photo</button>
                 <h3 class="b-profile__top__name">{{ user.username }}</h3>
                 <div class="b-profile__top__content">                
                     <div class="b-profile__top--left">
@@ -79,6 +80,9 @@
             },
             unfollow(){
                 this.$store.dispatch('unFollow');
+            },
+            logout: function () {
+                this.$store.commit('logout');
             }
         },
         computed: {

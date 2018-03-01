@@ -72,7 +72,7 @@
         	},
             openComments(index){
                 this.$store.dispatch('openComments', index) 
-                //this.$store.commit('openCommentAdding')              
+                this.$store.commit('openCommentAdding')              
             },
         	bottomVisible: function(context){
         		if(this.likesPopup){

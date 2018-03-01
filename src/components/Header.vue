@@ -42,9 +42,6 @@
 						<router-link :to="'/dashboard/' + user.username">
 							<img :src='imageRoot + user.image.avatar' alt="" width="39" height="39">
 						</router-link>
-						<div class="b-header__submenu">
-							<button v-on:click='logout' class="">Logout</button>
-						</div>
 					</li>
 					<li class="header-upload">
 						<a href="" @click.prevent="showUploadFunc">
@@ -103,9 +100,6 @@
             	this.$store.dispatch('updateTitle', this.titleD);
             	this.$store.commit('setSearchIcon');
         	},
-            logout: function () {
-      			this.$store.commit('logout');
-            }
         },
         computed: {
             ...mapGetters({

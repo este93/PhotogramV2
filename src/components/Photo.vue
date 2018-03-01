@@ -11,7 +11,7 @@
 
 			<div v-if="post.type_id == 1" class="o-photo__img" @click="imagePopup(index)">
 				<picture>
-				    <source :srcset="imageRoot + post.media.medium" media="(min-width: 768px)" />
+				    <source :srcset="imageRoot + post.media.medium" media="(min-width: 400px)" />
 				    <img v-if="grid && isMobile" :srcset="imageRoot + post.media.small" />
 				    <img v-else :srcset="imageRoot + post.media.medium" />
 				</picture>

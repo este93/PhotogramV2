@@ -121,6 +121,22 @@ const actions = {
         commit('setLoading')
     })
   },
+  addComment: function({commit, dispatch}, data){ 
+    commit('setLoading')   
+    axios.post('comments/', data).then(response => {
+      return dispatch('setComments', state.currentPostIndex).then(() => {
+          commit('setLoading')
+      })   
+    })
+  },
+  deleteComment: function({commit,dispatch}, commentId){    
+    commit('setLoading')
+    axios.delete('comments/' + commentId).then(response => {
+      return dispatch('setComments', state.currentPostIndex).then(() => {
+          commit('setLoading')
+      })
+    })
+  },
   resetPosts: function(context, payload){
     context.commit('resetPosts')
   },
@@ -130,7 +146,7 @@ const actions = {
         commit('setImagePopup')
         commit('setLoading')
     })
-  },
+  }
 }
 
 export default {

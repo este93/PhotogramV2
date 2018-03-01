@@ -16,32 +16,43 @@
 	}
 	&--outer{
 		max-height: 90vH;
-		overflow: scroll;
+		overflow-Y: scroll;
 	    @include breakpoint(desktop){
 			//height: 200px;
 	    }
 	}
 	&--inner{
 		padding: 24px 17px 50px 17px;
+	    @include breakpoint(desktop){
+			padding: 49px 38px;
+	    }
 	}
 	&__single{
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 15px;
+		position: relative;
+	    @include breakpoint(desktop){
+			margin-bottom: 35px;
+	    }
 		&--left{
 			display: flex;
 			align-items: center;
 			width: calc(100% - 30px);
+		    @include breakpoint(desktop){
+				width: calc(100% - 50px);
+		    }
 		}
 		&--right{
 			width: 25px;
 		    padding-right: 4px;
 		    padding-top: 11px;
-			// display: flex;
-   //  		align-items: center;
 			img{
 				margin-left: auto;
 			}
+		    @include breakpoint(desktop){
+				width: 30px;				
+		    }
 		}
 	}
 	&__img{
@@ -53,6 +64,10 @@
 			border-radius: 100%;
 			width: 100%;
 		}
+	    @include breakpoint(desktop){
+			width: 44px;
+		    height: 44px;			
+	    }
 	}
 	&__txt{
 		width: calc(100% - 44px);
@@ -63,8 +78,22 @@
 		span{
 			font-family: RobotoBold;
 		}
+	    @include breakpoint(desktop){
+    		font-size: 16px;
+    		line-height: 21px;
+	    }
 	}
-
+	&__delete{
+		position: absolute;
+	    left: -7px;
+	    top: 12px;
+	    font-family: Roboto;
+	    font-weight: bold;
+	    cursor: pointer;
+	    @include breakpoint(desktop){
+			left: -20px;			
+	    }
+	}
 	&__form{    
 		position: fixed;
 	    bottom: 47px;
@@ -73,6 +102,11 @@
 	    left: 0;
 	    border-top: 1px solid rgba(149, 152, 154, 0.5);
 	    padding: 5px 15px;
+	    @include breakpoint(desktop){
+			position: absolute;		
+			bottom: 0;	
+			padding: 10px 19px 10px 34px;
+		}
 	    form{
 	    	display: flex;
 		    align-items: center;
@@ -80,14 +114,18 @@
 	    }
 	    &__icon{
 	    	width: 27px;
+		    @include breakpoint(desktop){
+	    		width: 33px;
+		    }
 	    }
 	    .c-profile-edit__input{
-	    	width: auto;
+	    	width: calc(100% - 60px);
 		    margin: 0;
 		    border: 0;
 		    font-size: 16px;
-		    height: 27px;
+		    height: 30px;
     		margin-left: 13px;
+    		resize: none;
 	    }
 		.c-profile-edit__submit{
 			margin: 0;
@@ -97,6 +135,10 @@
 		    width: 30px;
 			height: 30px;
 			margin-left: auto;
+		    @include breakpoint(desktop){
+			    width: 32px;
+				height: 32px;
+		    }
 		}
 	}
 }

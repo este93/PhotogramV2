@@ -4,6 +4,10 @@
 		<div class="b-comments__content">
       <div class="b-comments--outer">
 			   <div class="b-comments--inner">
+          <div class="spinner" v-show="loading">
+      <div class="double-bounce1"></div>
+      <div class="double-bounce2"></div>
+    </div>
             <div v-if="addingComment" class="b-comments__form">
                 <form action="" @submit.prevent="addComment" class="c-profile-edit__form">
                     <img class="b-comments__form__icon" src='../assets/img/comment-icon@2x.png' alt="">
@@ -12,6 +16,7 @@
                 </form>
             </div>
     				<div class="b-comments__single" v-for="(com, index) in comments">
+              <span class="b-comments__delete" @click="deleteComment(index)" v-if="com.username == currentUsername">X</span>
     					<div class="b-comments__single--left">
     						<div class="b-comments__img">
                     <img :src="imageRoot + com.user_image.comment" v-if="com.user_image">                  
@@ -36,24 +41,21 @@
 	export default{
         data(){
         	return{        		
-                commentBody: ''
+            commentBody: ''
         	}
         },
         methods: {
-        	hideComments(){    
-        		this.$store.dispatch('hideComments')   
-            this.$store.commit('resetPost');       
-        	},
-            addComment(submitEvent){
-              let self = this
+          	hideComments(){    
+          		this.$store.dispatch('hideComments')   
+              this.$store.commit('resetPost');       
+          	},
+            addComment(){
               let data = {
                 post_id: this.currentPost.id,
                 body: this.commentBody
               }
-              axios.post('comments/', data).then(response => {
-                 this.$store.dispatch('setComments', self.currentPostIndex)   
-                 this.commentBody = ''    
-              })
+              this.$store.dispatch('addComment', data)   
+              this.commentBody = ''              
             },
             likeIt(index){
                 this.$store.dispatch('like', [index, 2])  
@@ -61,16 +63,24 @@
             unlikeIt(index){
                 this.$store.dispatch('unlike', [index, 2])  
             },
+            deleteComment(index){
+              let commentId = this.comments[index].id
+              this.$store.dispatch('deleteComment', commentId)  
+            }
         },
         computed:{
             ...mapGetters({
               addingComment: 'addCommentPopup',
               currentPost: 'getPost',
               imageRoot: 'getImageRoot',
+              loading: 'getLoading',
               loggedUser: 'getLoggedUser',
               currentPostIndex: 'getCurrentPostIndex',
               comments: 'getComments'
-            })
+            }),
+            currentUsername(){
+              return this.$store.state.users.loggedUser[0].username
+            }
         }
     }
 </script>

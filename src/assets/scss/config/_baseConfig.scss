@@ -25,7 +25,7 @@ html, body {
 body{
     padding-top: 47px;
     @include breakpoint(desktop){
-        padding-top: 5rem;
+        padding-top: 80px;
     }
 }
 
