@@ -92,6 +92,7 @@
 		text-align: center;
 		margin-top: 0.7rem;
 		display: none;
+		cursor: pointer;
 		@include breakpoint(desktop){
 			display: block;
 		}

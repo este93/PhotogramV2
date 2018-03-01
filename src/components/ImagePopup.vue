@@ -1,7 +1,8 @@
 <template>
 	<div class="b-photos-popup">
 		<div class="b-photos-popup__back" @click="hidePopup"></div>
-		<div class="o-photo">
+
+		<div class="o-photo" v-if="post">
 		
 			<router-link :to="'dashboard/' + post.username" class="o-photo__head">
 				<div class="o-photo__head__img">
@@ -10,7 +11,7 @@
 				<h3 class="o-photo__head__name">{{ post.username }}</h3>
 			</router-link>
 
-			<button v-if="this.$route.name == 'dashboard'" class="o-photo__edit-btn btn">Edit Post</button>
+			<button v-if="this.$route.name == 'dashboard'" class="o-photo__edit-btn btn" @click="editPost()">Edit Post</button>
 
 			<div v-if="post.type_id == 1" class="o-photo__img">
                 <button @click="slideIt('left')" class="o-photo__arrow left"><img src="../assets/img/slider-arrow.png" alt=""></button>
@@ -32,6 +33,7 @@
   		<transition name="fade">
 			<commentPopup v-show="showComments"></commentPopup>
 		</transition>	
+
 	</div>	
 </template>
 
@@ -42,7 +44,6 @@
     import { mapGetters } from 'vuex'
 
 	export default{
-		props: ['index'],
 		components: {
 			comments,
 			commentPopup,
@@ -51,33 +52,41 @@
         data(){
         	return{        		
             	imageRoot: this.$store.getters.getImageRoot,
-      			post: this.$store.getters.getCurrentPost,
-      			currentPostIndex: this.$store.getters.getCurrentPostIndex
+      			post: this.$store.getters.getPost
         	}
         },
         methods: {
         	hidePopup(){    
         		this.$store.commit('setImagePopup');
+        		this.$store.commit('resetPost');
         	},
         	slideIt(direction){
         		if(direction == 'left'){
         			if(this.currentPostIndex == 0)
         				this.currentPostIndex
         			else
-        				this.currentPostIndex -= 1
+        				this.$store.state.posts.currentPostIndex -= 1
         		}
         		else
-        			this.currentPostIndex += 1
+        			this.$store.state.posts.currentPostIndex += 1
 
         		if(this.currentPostIndex + 3 > this.$store.state.posts.posts.length)
         			this.$store.dispatch('loadPosts', this.$route.params.username)
         		this.post = this.$store.state.posts.posts[this.currentPostIndex]
-        	}
+        	},
+            editPost(){
+                data: {
+                    thumbnail: '';
+                    description: '';
+                }
+                this.$store.dispatch('editPost', data)
+            }
         },
         computed: {	
             ...mapGetters({
               showComments: 'getCommentsPopup',
               isMobile: 'getMobile',
+              currentPostIndex: 'getCurrentPostIndex'
             })        	
         }
     }

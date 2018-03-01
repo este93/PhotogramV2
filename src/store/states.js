@@ -105,7 +105,7 @@ const mutations = {
   openCommentAdding: (state) => {
     state.addCommentPopup = !state.addCommentPopup;
   },
-  openComments: (state, payload) => {
+  openCommentsPopup: (state, payload) => {
     state.commentsPopup = true;
     state.searchIcon = false;
   },
@@ -143,10 +143,12 @@ const actions = {
   openCommentAdding: function(context){
     context.commit('openCommentAdding')
   },  
-  openComments: function(context, index){
-    context.commit('updateTitle', 'Comments');
-    context.commit('setCurrentPost', index)
-    context.commit('openComments')
+  openCommentsPopup: function({commit,dispatch, rootState}, index){
+      commit('updateTitle', 'Comments');
+      if(Object.keys(rootState.posts.post).length === 0){
+        dispatch('setPost', index)
+      }
+      commit('openCommentsPopup')
   },
   hideComments: function(context){
     context.commit('hideComments')

@@ -3,7 +3,8 @@ const state = {
   posts: [],
   nextPage: 1,
   currentPostIndex: '',
-  currentPost: {}
+  post: {},
+  comments: []
 }
 
 // getters
@@ -11,12 +12,15 @@ const getters = {
   getPosts: state => {
     return state.posts
   },
-  getCurrentPost: state => {
-    return state.currentPost
-  },
   getCurrentPostIndex: state => {
     return state.currentPostIndex
-  }
+  },
+  getPost: state => {
+    return state.post
+  },
+  getComments: state => {
+    return state.comments
+  },
 }
 
 // mutations
@@ -30,9 +34,17 @@ const mutations = {
     state.posts = []
     state.currentPostIndex = ""
   },
-  setCurrentPost: (state, index) => {
-    state.currentPost = state.posts[index]
+  resetPost: (state) => {
+    state.post = {}
+    state.comments = []
+  },
+  setPost: (state, {data, index}) => {
+    //state.post = data
+    state.post = state.posts[index]
     state.currentPostIndex = index
+  },
+  setComments: (state, {data}) => {
+    state.comments = data
   },
 }
 
@@ -67,11 +79,57 @@ const actions = {
       console.log(err)
     })
   },
+  setPost: function({commit, rootState}, index){
+    let postId = rootState.posts.posts[index].id;
+    return new Promise((resolve, reject) => {
+      commit('setPost', { index: index })
+      resolve()
+      // axios.get('/posts/' + postId).then((response) =>{
+      //   commit('setPost', { data: response.data.data, index: index })
+      //   resolve()
+      // }) 
+    })      
+  },
+  editPost: function({commit, rootState}, index){
+    //let postId = rootState.posts.posts[index].id;
+    axios.patch('posts', {
+      thumbnail: '',
+      description: ''
+    }).then((response) =>{
+      //commit('setPost', { data: response.data.data, index: index })
+    })      
+  },
+  setComments: function({commit, rootState}, index){
+    let postId = rootState.posts.posts[index].id;
+    return new Promise((resolve, reject) => { 
+      axios.get('/comments/', {
+        params: {
+          post_id: postId,
+          amount: 20,
+          page: 1
+        }
+      }).then((response) =>{
+          commit('setComments', { data: response.data.data})
+          resolve() 
+      })       
+    })     
+  },
+  openComments: function({commit, dispatch}, index){
+    commit('setLoading')
+    return dispatch('setComments', index).then(() => {
+        dispatch('openCommentsPopup', index)
+        commit('setLoading')
+    })
+  },
   resetPosts: function(context, payload){
     context.commit('resetPosts')
   },
-  setCurrentPost: function(context, index){
-    context.commit('setCurrentPost', index)
+  openImagePopup: function({commit, dispatch}, index){
+    commit('setLoading')
+    return dispatch('setPost', index).then(() => {
+        commit('setImagePopup')
+        commit('setLoading')
+    })
   },
 }
 

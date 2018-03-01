@@ -21,13 +21,17 @@ const mutations = {
     if(response.type == 1)
       response.rootState.posts.posts[response.index].auth_like_id = response.dataId
     else
-      response.rootState.posts.currentPost.comments[response.index].auth_like_id = response.dataId
+      response.rootState.posts.comments[response.index].auth_like_id = response.dataId
   },
   unlike: (state, response) => {
     if(response.type == 1)
       response.rootState.posts.posts[response.index].auth_like_id = null
     else
-      response.rootState.posts.currentPost.comments[response.index].auth_like_id = null
+      response.rootState.posts.comments[response.index].auth_like_id = null
+  },
+  showLikesPopup: function(){    
+    state.likes.likes = []
+    state.likes.likesNextPage = 1
   }
 }
 
@@ -60,8 +64,8 @@ const actions = {
       likable_id = rootState.posts.posts[index].id;
     }
     else{
-      likable_id = rootState.posts.currentPost.comments[index].id
-      rootState.posts.currentPost.comments[index].auth_like_id = true
+      likable_id = rootState.posts.comments[index].id
+      rootState.posts.comments[index].auth_like_id = true
     }
     let data = {
       likable_id: likable_id,
@@ -85,7 +89,7 @@ const actions = {
       rootState.posts.posts[index].auth_like_id = null
     }
     else{
-      likable_id = rootState.posts.currentPost.comments[index].auth_like_id
+      likable_id = rootState.posts.comments[index].auth_like_id
     }
     rootState.posts.posts[index].likes_count -= 1
     let data = {
@@ -96,7 +100,7 @@ const actions = {
     axios.delete('likes/' + likable_id).then(response => {
       commit('unlike', data)
     })
-  }
+  },
 }
 
 export default {

@@ -43,7 +43,7 @@
 
 <script>
 	import likes from './Likes.vue'
-	import imagePopup from './imagePopup.vue'
+	import imagePopup from './ImagePopup.vue'
 	import commentPopup from './CommentPopup.vue'
 	import comments from './Comments.vue'
 	import { mapGetters } from 'vuex'
@@ -80,8 +80,8 @@
 		},
         methods:{
         	imagePopup(index){
-				this.$store.dispatch('setCurrentPost', index)
-	        	this.$store.commit('setImagePopup');
+				this.$store.dispatch('openImagePopup', index)
+	        	//this.$store.commit('setImagePopup');
         	},    
         	bottomVisible() {
 		      const scrollY = window.scrollY

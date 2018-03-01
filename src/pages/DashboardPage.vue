@@ -9,7 +9,7 @@
                 <div class="b-profile__top__content">                
                     <div class="b-profile__top--left">
                         <div class="b-profile__top__img">
-                            <img :src="imageRoot + user.image.profile" alt="">
+                            <img :src="imageRoot + user.image.profile" alt="" v-if="user.image">
                         </div>
                     </div>
                     <div class="b-profile__top--right">

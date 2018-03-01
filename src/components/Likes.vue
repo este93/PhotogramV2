@@ -35,7 +35,7 @@
 </template>
 
 <script>
-	import likesPopup from './likesPopup'
+	import likesPopup from './LikesPopup'
 	import { mapGetters } from 'vuex'
 
 	export default{
@@ -72,7 +72,7 @@
         	},
             openComments(index){
                 this.$store.dispatch('openComments', index) 
-                this.$store.commit('openCommentAdding')              
+                //this.$store.commit('openCommentAdding')              
             },
         	bottomVisible: function(context){
         		if(this.likesPopup){

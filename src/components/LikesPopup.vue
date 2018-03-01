@@ -7,7 +7,7 @@
 					<div class="b-comments__single" v-for="like in likes">
 						<div class="b-comments__single--left">
 							<div class="b-comments__img">   
-								<img :src="imageRoot + like.image" alt="" v-if="like.image" width="35" height="35">            
+								<img :src="imageRoot + like.image.comment" alt="" v-if="like.image" width="35" height="35">            
 	                        </div>
 							<p class="b-comments__txt"><span>{{ like.username }}</span></p>
 						</div>
@@ -39,7 +39,8 @@
 		methods:{			
         	hideLikesPopup(){    
         		this.$store.commit('showLikesPopup')
-        		this.$store.state.likes = []
+        		this.$store.commit('hideLikesPopup')
+
         	},
 		}
 	}

@@ -40,6 +40,7 @@
 			@include breakpoint(desktop){
 		    	margin-top: 11vH;
 				max-width: 500px;
+				width: 100%;
 			    &__comments__txt, &__comments__all{
 					color: white;
 			    }
@@ -69,8 +70,12 @@
 .spinner {
   width: 40px;
   height: 40px;
-  position: relative;
-  margin: 100px auto;
+  //position: relative;
+  //margin: 100px auto;
+  position: absolute;
+  margin: 40px auto;
+  left: 0;
+  right: 0;
 }
 
 .double-bounce1, .double-bounce2 {
