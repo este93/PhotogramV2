@@ -1,4 +1,5 @@
 <template>
+  <div>
 	<div class="b-header-wrap">
 		<div class="b-header--mobile">
 			<router-link v-if="search && this.$route.name == 'home'" class="b-header__back" to="/search">
@@ -70,9 +71,11 @@
 				</div>
 			</div>
 		</header>
-
-		<UploadPhoto v-show="upload"></UploadPhoto>		
 	</div>
+
+	<UploadPhoto v-show="upload"></UploadPhoto>	
+
+  </div>
 </template>
 <script>
 

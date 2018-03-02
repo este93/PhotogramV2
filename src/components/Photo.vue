@@ -1,5 +1,5 @@
 <template>
-	<div class="b-photos">
+	<div class="b-photos" v-infinite-scroll="loadMore" infinite-scroll-disabled="loadingPosts" infinite-scroll-distance="scrollDistance" infinite-scroll-immediate-check='false'>
 		<div class="o-photo" v-for="(post, index) in posts" v-if="post">
 
 			<router-link :to="'dashboard/' + post.username" class="o-photo__head">
@@ -31,6 +31,11 @@
 		  <div class="double-bounce2"></div>
 		</div>
 
+		<div class="spinner spinner--photo" v-show="loadingPosts">
+		  <div class="double-bounce1"></div>
+		  <div class="double-bounce2"></div>
+		</div>
+
   		<transition name="fade">
 			<imagePopup v-if="showImagePopup"></imagePopup>
 		</transition>	
@@ -47,8 +52,10 @@
 	import commentPopup from './CommentPopup.vue'
 	import comments from './Comments.vue'
 	import { mapGetters } from 'vuex'
+	var infiniteScroll =  require('vue-infinite-scroll');
 
 	export default{
+  		directives: {infiniteScroll},
 		components: {
 			likes,
 			comments,		
@@ -58,38 +65,43 @@
         data(){
             return{
             	routeUsername: this.$route.params.username,
-				bottom: false
+				bottom: false,
             }
         },
         created(){
-		    window.addEventListener('scroll', () => {
-		      this.bottom = this.bottomVisible()
-		    })	    
+		    // window.addEventListener('scroll', () => {
+		    //   this.bottom = this.bottomVisible()
+		    // })	    
 			this.$store.dispatch('loadPosts', this.routeUsername)
         },	
 		watch: {
-		    bottom(bottom) {
-		      if (bottom) {
-		        this.$store.dispatch('loadPosts', this.$route.params.username)
-		      }
-		    },
+		    // bottom(bottom) {
+		    //   if (bottom) {
+		    //     this.$store.dispatch('loadPosts', this.$route.params.username)
+		    //   }
+		    // },
 		    '$route.params.username': function (id) {
         	  this.$store.dispatch('resetPosts')
 		      this.$store.dispatch('loadPosts', this.$route.params.username)	
 		    }
 		},
         methods:{
+        	loadMore: function() {
+        		if(!this.noPosts){
+		      		this.$store.dispatch('loadPosts', this.$route.params.username)
+        		}
+		    },
         	imagePopup(index){
 				this.$store.dispatch('openImagePopup', index)
 	        	//this.$store.commit('setImagePopup');
         	},    
-        	bottomVisible() {
-		      const scrollY = window.scrollY
-		      const visible = document.documentElement.clientHeight
-		      const pageHeight = document.documentElement.scrollHeight
-		      const bottomOfPage = visible + 1000 + scrollY >= pageHeight
-		      return bottomOfPage
-		    },	
+      //   	bottomVisible() {
+		    //   const scrollY = window.scrollY
+		    //   const visible = document.documentElement.clientHeight
+		    //   const pageHeight = document.documentElement.scrollHeight
+		    //   const bottomOfPage = visible + 1000 + scrollY >= pageHeight
+		    //   return bottomOfPage
+		    // },	
         },
         computed: {  
             ...mapGetters({
@@ -99,8 +111,16 @@
 		      grid: 'getGrid',
 		      isMobile: 'getMobile',
 		      loading: 'getLoading',
-              imageRoot: 'getImageRoot'
-		    })
+              imageRoot: 'getImageRoot',
+              noPosts: 'getNoPosts',
+              loadingPosts: 'getLoadingPosts'
+		    }),
+		    scrollDistance(){
+		    	if(this.isMobile)
+		    		return 300
+		    	else
+		    		return 1000
+		    }
         }
     }
 </script>

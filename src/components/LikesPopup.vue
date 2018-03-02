@@ -39,8 +39,6 @@
 		methods:{			
         	hideLikesPopup(){    
         		this.$store.commit('showLikesPopup')
-        		this.$store.commit('hideLikesPopup')
-
         	},
 		}
 	}

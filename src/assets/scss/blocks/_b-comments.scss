@@ -38,13 +38,13 @@
 		&--left{
 			display: flex;
 			align-items: center;
-			width: calc(100% - 30px);
+			width: calc(100% - 40px);
 		    @include breakpoint(desktop){
 				width: calc(100% - 50px);
 		    }
 		}
 		&--right{
-			width: 25px;
+			width: 37px;
 		    padding-right: 4px;
 		    padding-top: 11px;
 			img{
@@ -94,6 +94,16 @@
 			left: -20px;			
 	    }
 	}
+	&__deletePost{
+		font-family: Roboto;
+	    font-size: 11px;
+	    text-transform: uppercase;
+	    cursor: pointer;
+	    font-weight: bold;
+	    @include breakpoint(desktop){
+	    	font-size: 14px;	
+	    }
+	}
 	&__form{    
 		position: fixed;
 	    bottom: 47px;
@@ -102,6 +112,7 @@
 	    left: 0;
 	    border-top: 1px solid rgba(149, 152, 154, 0.5);
 	    padding: 5px 15px;
+	    z-index: 2;
 	    @include breakpoint(desktop){
 			position: absolute;		
 			bottom: 0;	
@@ -138,6 +149,20 @@
 		    @include breakpoint(desktop){
 			    width: 32px;
 				height: 32px;
+		    }
+		}
+	}
+	&__personal{
+		position: relative;
+		&:after{
+			position: absolute;
+			content: '';
+			left: -38px;
+    		right: -38px;
+			bottom: -8px;
+			border-bottom: 1px solid rgba(149, 152, 154, 0.5);
+		    @include breakpoint(desktop){
+				bottom: -15px;
 		    }
 		}
 	}

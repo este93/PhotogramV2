@@ -5,6 +5,7 @@ const state = {
   homeIcon: '',
   notificationIcon: '',
   commentsPopup: false,
+  editPopup: false,
   imagePopup: false,
   upload: false,
   loading: false,
@@ -31,6 +32,9 @@ const getters = {
   },
   getCommentsPopup: function(state){
     return state.commentsPopup; 
+  },
+  getEditPopup: function(state){
+    return state.editPopup; 
   },
   getImagePopup: function(state){
     return state.imagePopup; 
@@ -75,6 +79,9 @@ const mutations = {
   setCommentsPopup: (state) => {
     state.commentsPopup = !state.commentsPopup;
   },
+  setEditPopup: (state) => {
+    state.editPopup = !state.editPopup;
+  },
   setImagePopup: (state) => {
     state.imagePopup = !state.imagePopup;
     state.searchIcon = false;
@@ -98,7 +105,7 @@ const mutations = {
     state.likesPopup = false
   },
   setMobile: (state) => {
-    if($(document).width() > 1024){
+    if(document.body.clientWidth > 1024){
       state.isMobile = false
     }
   },

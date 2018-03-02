@@ -2,16 +2,24 @@
   <div class="b-upload">
     <div class="b-upload__back" @click="hideUpload"></div>
     <form action="" class="b-upload__content" enctype="multipart/form-data" @submit.prevent="uploadPhoto">
+      
+      <div class="b-upload__capture">
+        <vue-webcam ref='webcam'></vue-webcam>
+        <!-- <img :src="photo" alt="" style="width:400px;height:300px" /> -->
+        <button type="button" class="btn" @click="take_photo">Take Photo</button>
+        <!-- <button type="button" class="btn" @click="uploadPhoto">Upload Photo</button>         -->
+      </div>
+
       <h3 class="b-upload__title">Upload Photo</h3>      
       <div class="b-upload__image--inner">
         <div class="b-upload__image">   
           <input type="file" name="media" ref='imageInput' accept="image/*" @change="imagePicked">
-          <img :src="imageUrl" alt="" height="500">
+          <img :src="photo" alt="" width="500">
           <div class="b-upload__drag" @click="changeImage" v-show="showDragTitle">
             <img class="" src='../assets/img/upload-icon2.png' alt="">
             <h3>drag and drop</h3>              
           </div>
-          <div class="spinner" v-show="imageUploading">
+          <div class="spinner" v-show="loading">
             <div class="double-bounce1"></div>
             <div class="double-bounce2"></div>
           </div>
@@ -24,53 +32,40 @@
 </template>
 
 <script>
+  import VueWebcam from 'vue-webcam'
+  import { mapGetters } from 'vuex'
+
   export default {
-    data(){
-      return{
-        imageRoot: this.$store.getters.getImageRoot,
-        imageUrl: '',
-        showDragTitle: true,
-        img: '',
-        description: '',
-        imageUploading: false
-      }
+    components: {
+      VueWebcam
+    },
+    computed:{
+      ...mapGetters({
+        loading: 'getLoading',
+        photo: 'getPhoto',
+        showDragTitle: 'getDragTitle',
+        description: 'getDescription'
+      })
     },
     methods: {
-      reset() {
-        //this.$refs.imageInput = '';
-        this.imageUrl = '';
-        this.img = '';
-        this.description = '';
-        this.imageUploading = false;
-        this.$store.dispatch('showUpload');
-      },
       changeImage(){
         this.$refs.imageInput.click()
+      },           
+      take_photo (event) {  
+        let data = {
+          refs: this.$refs.webcam.getPhoto()
+        }
+        this.$store.dispatch('takePhoto', data)      
       },
       imagePicked(event){
-        var formData = new FormData();
-        formData.append("image", this.img);
-        this.img = event.target.files[0];
-        var reader = new FileReader();
-        reader.onload = (e) => {
-          this.imageUrl = e.target.result;
-        }
-        reader.readAsDataURL(this.img);
-        this.showDragTitle = false;
+        this.$store.dispatch('imagePicked', event)        
       },
       uploadPhoto(){
-        var self = this;
-        var formData = new FormData();
-        formData.append("image", this.img);
-        formData.append("description", this.description);
-        self.imageUploading = true;
-        axios.post('/posts', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data' , 'Authorization': 'Bearer ' + JSON.parse(window.localStorage.getItem('authUser')).access_token
-          }
-        }).then(function(){
-          self.reset();
-        })
+        let data = {
+          description: this.description
+        }
+        let self = this
+        this.$store.dispatch('uploadPhoto', data);           
       },
       hideUpload(){    
         this.$store.dispatch('showUpload');

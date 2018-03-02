@@ -11,7 +11,7 @@
 				<h3 class="o-photo__head__name">{{ post.username }}</h3>
 			</router-link>
 
-			<button v-if="this.$route.name == 'dashboard'" class="o-photo__edit-btn btn" @click="editPost()">Edit Post</button>
+			<button v-if="this.$route.name == 'dashboard'" class="o-photo__edit-btn btn" @click="editPost(currentPostIndex)">Edit Post</button>
 
 			<div v-if="post.type_id == 1" class="o-photo__img">
                 <button @click="slideIt('left')" class="o-photo__arrow left"><img src="../assets/img/slider-arrow.png" alt=""></button>
@@ -30,9 +30,14 @@
 			<comments v-bind:post="post"></comments>
 
 		</div>
+
   		<transition name="fade">
 			<commentPopup v-show="showComments"></commentPopup>
 		</transition>	
+
+        <transition name="fade">
+            <editPost v-show="showEdit"></editPost>
+        </transition>   
 
 	</div>	
 </template>
@@ -40,6 +45,7 @@
 <script>
 	import comments from './Comments.vue'
 	import commentPopup from './CommentPopup.vue'
+    import editPost from './EditPost.vue'
 	import likes from './Likes.vue'
     import { mapGetters } from 'vuex'
 
@@ -47,12 +53,14 @@
 		components: {
 			comments,
 			commentPopup,
-			likes		
+			likes,
+            editPost		
 		},
         data(){
         	return{        		
             	imageRoot: this.$store.getters.getImageRoot,
-      			post: this.$store.getters.getPost
+      			post: this.$store.getters.getPost,
+                titleD: this.$store.getters.title
         	}
         },
         methods: {
@@ -74,19 +82,22 @@
         			this.$store.dispatch('loadPosts', this.$route.params.username)
         		this.post = this.$store.state.posts.posts[this.currentPostIndex]
         	},
-            editPost(){
-                data: {
-                    thumbnail: '';
-                    description: '';
+            editPost(index){
+                this.$store.dispatch('setComments', index)
+                this.$store.commit('setEditPopup')
+                if(this.showEdit){
+                    this.$store.dispatch('updateTitle', 'Edit Post');
+                }else{
+                    this.$store.dispatch('updateTitle', this.titleD);
                 }
-                this.$store.dispatch('editPost', data)
             }
         },
         computed: {	
             ...mapGetters({
               showComments: 'getCommentsPopup',
               isMobile: 'getMobile',
-              currentPostIndex: 'getCurrentPostIndex'
+              currentPostIndex: 'getCurrentPostIndex',
+              showEdit: 'getEditPopup',
             })        	
         }
     }

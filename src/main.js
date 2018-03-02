@@ -7,7 +7,7 @@ import { routerHistory, writeHistory } from 'vue-router-back-button'
 import Routes from './routes.js'
 import Header from './components/Header'
 import {store} from './store/index'
-window.$ = window.jQuery = require('jquery')
+//window.$ = window.jQuery = require('jquery')
 
 require('./assets/scss/default.scss')
 

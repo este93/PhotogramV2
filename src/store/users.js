@@ -63,6 +63,9 @@ const mutations = {
       var authUser = window.localStorage.getItem('authUser')
       window.localStorage.removeItem('authUser', JSON.stringify(authUser))
       router.push({name: 'landing'})
+    },
+    resetUser: (state) => {
+      state.getUserInfo = ''
     }
 }
 

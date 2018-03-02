@@ -18,6 +18,7 @@
             this.$store.dispatch('updateTitle', 'photo<span>gram</span>');
             this.$store.dispatch('setHomePage');                       
             this.$store.dispatch('resetPosts') 
+            this.$store.commit('resetUser')
         }
     }
 </script>

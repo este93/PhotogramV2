@@ -2,7 +2,8 @@
 	overflow: hidden;
 	margin-top: 2.7rem;
 	display: flex;    
-	flex-flow: wrap;
+	flex-flow: wrap;	
+    position: relative;
 	@include breakpoint(desktop){
 		flex-flow: wrap;
 		max-width: 1480px;
@@ -76,6 +77,9 @@
   margin: 40px auto;
   left: 0;
   right: 0;
+  &--photo{
+  	bottom: 50px;
+  }
 }
 
 .double-bounce1, .double-bounce2 {
