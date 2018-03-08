@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import {forgotPassword} from '../../config'
+import config from '../../config'
 
 import Vue from 'vue'
 
@@ -47,7 +47,7 @@ export default {
             const postData = {
                 email: this.email
             }
-            this.$http.post(forgotPassword, postData)
+            this.$http.post(config.forgotPassword, postData)
             .then(response => {
                 if (response.status === 200){
                     toastr.success('Email was sent to you, please confirm !')

@@ -37,8 +37,7 @@
       left: 0;
       top: 0rem;
       z-index: 1;
-      width: 20px;
-      height: 20px;
+      font-size: 19px;
       @include breakpoint(desktop){
         width: 30px;
         height: 30px;

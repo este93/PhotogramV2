@@ -13,7 +13,7 @@
             <div class="o-photo__comments__img">
                 <router-link :to="'/dashboard/' + comment.username">
                     <img :src="imageRoot + comment.user_image.comment" v-if="comment.user_image">
-                   </router-link> 
+                </router-link> 
             </div>
             <h3 class="o-photo__comments__txt">{{comment.body}}</h3>
         </div>
@@ -32,6 +32,9 @@
         },
         methods: {
             openComments(currentPostIndex){
+                if(!this.isMobile){       
+                    document.getElementsByTagName( 'html' )[0].setAttribute( 'class', 'htmlOverflow' );
+                }
                 this.$store.dispatch('openComments', currentPostIndex)
             }
         },

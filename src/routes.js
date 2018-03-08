@@ -12,7 +12,6 @@ import ProfileEdit from './pages/ProfileEdit'
 import Search from './pages/Search'
 import Notifications from './pages/Notifications'
 import Terms from './pages/Terms'
-import CameraView from './components/CameraView'
 
 export default[
 	{path: '/', component: App, name:'landing'},
@@ -23,8 +22,7 @@ export default[
     {path: '/profile-edit/:username/', component: ProfileEdit, meta: { requiresAuth: true}, name:'profile-edit' , props: true },
     {path: '/notifications', component: Notifications, meta: { requiresAuth: true}, name:'notifications'},
     {path: '/search', component: Search, meta: { requiresAuth: true}, name:'search'},
-    {path: '/terms', component: Terms, name:'terms'},
-    {path: '/camera', component: CameraView, name:'camera'}
+    {path: '/terms', component: Terms, name:'terms'}
 ]
 
 

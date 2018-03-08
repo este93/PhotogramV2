@@ -9,6 +9,9 @@
 				<div v-if="upload || showComments || imagePopup || likesPopup" @click="closeIt">
 					<img src='../assets/img/back.png' height="20" alt="">	
 				</div>
+				<router-link v-else-if="this.$route.name == 'dashboard'" to="/home">
+					<img src='../assets/img/back.png' height="20" alt="">	
+				</router-link>
 				<router-link v-else-if="$routerHistory.hasHistory()" :to="{ path: $routerHistory.previous().path }">
 					<img src='../assets/img/back.png' height="20" alt="">	
 				</router-link>	
@@ -39,7 +42,7 @@
 							<img v-else src='../assets/img/upload-icon-mob.png' alt="">
 						</a>
 					</li>
-					<li class="header-profile">
+					<li class="header-profile" v-if="user.image" @click="closeIt">
 						<router-link :to="'/dashboard/' + user.username">
 							<img :src='imageRoot + user.image.avatar' alt="" width="39" height="39">
 						</router-link>
@@ -102,7 +105,12 @@
             	this.$store.commit('headerCloseAll');
             	this.$store.dispatch('updateTitle', this.titleD);
             	this.$store.commit('setSearchIcon');
+				this.$store.commit('resetComments');
         	},
+        	closeAll(){
+            	this.$store.commit('headerCloseAll');
+            	this.$store.dispatch('updateTitle', this.titleD);        		
+        	}
         },
         computed: {
             ...mapGetters({

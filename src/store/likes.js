@@ -1,3 +1,5 @@
+import config from '../config.js'
+
 // initial state
 const state = { 
   likes: [],   
@@ -21,13 +23,13 @@ const mutations = {
     if(response.type == 1)
       response.rootState.posts.posts[response.index].auth_like_id = response.dataId
     else
-      response.rootState.posts.comments[response.index].auth_like_id = response.dataId
+      response.rootState.comments.comments[response.index].auth_like_id = response.dataId
   },
   unlike: (state, response) => {
     if(response.type == 1)
       response.rootState.posts.posts[response.index].auth_like_id = null
     else
-      response.rootState.posts.comments[response.index].auth_like_id = null
+      response.rootState.comments.comments[response.index].auth_like_id = null
   },
   showLikesPopup: function(){    
     state.likes.likes = []
@@ -53,7 +55,6 @@ const actions = {
       commit('setSearchIcon')
       commit('showLikesPopup')
       if(response.data.data = ""){
-        console.log('no more!')
       }
     })
   },
@@ -62,17 +63,17 @@ const actions = {
     if(type == 1){
       rootState.posts.posts[index].auth_like_id = true
       likable_id = rootState.posts.posts[index].id;
+      rootState.posts.posts[index].likes_count += 1
     }
     else{
-      likable_id = rootState.posts.comments[index].id
-      rootState.posts.comments[index].auth_like_id = true
+      likable_id = rootState.comments.comments[index].id
+      rootState.comments.comments[index].auth_like_id = true
     }
     let data = {
       likable_id: likable_id,
       likable_type: type
     }
-    rootState.posts.posts[index].likes_count += 1
-    axios.post('likes', data).then(response => {
+    axios.post(config.likesUrl, data).then(response => {
       let data = {
         dataId: response.data.data.id,
         index: index,
@@ -87,11 +88,11 @@ const actions = {
     if(type == 1){
       likable_id = rootState.posts.posts[index].auth_like_id;
       rootState.posts.posts[index].auth_like_id = null
+      rootState.posts.posts[index].likes_count -= 1
     }
     else{
-      likable_id = rootState.posts.comments[index].auth_like_id
+      likable_id = rootState.comments.comments[index].auth_like_id
     }
-    rootState.posts.posts[index].likes_count -= 1
     let data = {
       index: index,
       type: type,

@@ -4,6 +4,7 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
 import { routerHistory, writeHistory } from 'vue-router-back-button'
+import config from './config.js'
 import Routes from './routes.js'
 import Header from './components/Header'
 import {store} from './store/index'
@@ -15,7 +16,7 @@ var token = JSON.parse(window.localStorage.getItem('authUser'));
 
 // Axios
 window.axios = require('axios');
-axios.defaults.baseURL = "http://192.168.0.154:8000/api/";
+axios.defaults.baseURL = config.apiDomain;
 if(token){
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token.access_token;
 }

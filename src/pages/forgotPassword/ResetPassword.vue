@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import {resetPassword, getHeader} from '../../config'
+import config from '../../config'
 
 import Vue from 'vue'
 
@@ -76,7 +76,7 @@ export default {
                 token: getToken
 
             }
-            this.$http.post(resetPassword, postData)
+            this.$http.post(config.resetPassword, postData)
 
             .then(response => {
                 if (response.status === 200){

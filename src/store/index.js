@@ -4,6 +4,7 @@ import states from './states'
 import users from './users'
 import posts from './posts'
 import likes from './likes'
+import comments from './comments'
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export const store = new Vuex.Store({
     	states,
     	users,
     	posts,
+    	comments,
     	likes
     },
 	state: {

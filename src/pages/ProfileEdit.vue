@@ -5,9 +5,9 @@
 			<div class="c-profile-edit" v-if="user">
 				<div class="c-profile-edit__top">
 					<h3 class="c-profile-edit__top__title">Edit Profile</h3>
-					<div class="c-profile-edit__top__img" @click="changeImage">
-						<img v-if="image" :src="image" alt="" width="220" height="220">
-						<img v-else :src="imageRoot + user.image.profile_large" alt="" width="220" height="220">
+					<div class="c-profile-edit__top__img" @click="changeImage" v-if="user.image">
+						<img v-if="image" :src="image" alt="" width="200">
+						<img v-else :src="imageRoot + user.image.profile_large" alt="">
 					</div>
 					<form action="" class="hide" enctype="multipart/form-data">
 						<input type="file" name="image" ref='imageInput' accept="image/*" @change="imagePicked">
@@ -31,7 +31,7 @@
 						<input type="radio" value="2" name="" v-model="user.gender_id">
 						<label for="one">Female</label>						
 					</div>
-					<button class="c-profile-edit__logout">Log Out</button>
+					<button class="c-profile-edit__logout" @click='logout'>Log Out</button>
 					<input type="submit" value="Save" class="c-profile-edit__submit">
 
 				</form>
@@ -67,7 +67,6 @@
 				var self = this
 				this.checkUsername();
 				if(!this.usernameExists){
-					console.log('asd')
 					self.imageUploading = true;
 					axios.patch('users/auth/update',{ 
 						name: this.user.name, 
@@ -79,7 +78,8 @@
 					})
 					.then(function(response){
 						self.imageUploading = false;
-						self.$router.push({ name: 'profile-edit', params: { username: self.user.username }})
+            			self.$store.dispatch('loginUser')
+						self.$router.push({ name: 'dashboard', params: { username: self.user.username }})
 					}); 
 				}
 			},
@@ -94,6 +94,7 @@
 			imagePicked(event){
 				var self = this;
 				var img = event.target.files[0];
+    			require('formdata-polyfill')
 				var formData = new FormData();
 				formData.append("image", img);
 				self.imageUploading = true;
@@ -108,11 +109,12 @@
 	                    self.imageUploading = false
 				    }
 	                reader.readAsDataURL(img);
-	                axios.get('/users/auth/').then(function(response){
-	                	self.$store.dispatch('loginUser');
-	                })
+            		self.$store.dispatch('loginUser')
 			    })
-			}
+			},
+            logout: function () {
+                this.$store.commit('logout');
+            },
 		},
 	}
 </script>

@@ -3,8 +3,7 @@
         <app-header></app-header>
         <div class="wrapper-inner">
             <div class="b-profile__top" v-if="user">
-                <!-- <router-link class="btn" to="/camera">Take photo</router-link> -->
-                <button v-on:click='logout' class="b-profile__top--logout">Logout</button>
+                <button @click='logout' class="b-profile__top--logout">Logout</button>
                 <h3 class="b-profile__top__name">{{ user.username }}</h3>
                 <div class="b-profile__top__content">                
                     <div class="b-profile__top--left">
@@ -39,29 +38,23 @@
 
             <div :class="{'b-profile--photo' : !grid, 'b-profile--grid' : grid}">
                 <photo></photo>                
-            </div>
-
-            <takePhoto v-show="takePhoto"></takePhoto>    
+            </div> 
 
         </div>       
     </div>
 </template>
 
 <script>
-    import {apiDomain, getHeader, userUrl} from './../config'
     import Photo from '../components/Photo.vue'
-    import takePhoto from '../components/CameraView.vue'
     import { mapGetters } from 'vuex'
 
     export default{
         components: {
             Photo,
-            takePhoto
         },
         data(){
             return{
                 personalPage: '',
-                takePhoto: false
             }            
         },
         created(){
@@ -82,14 +75,13 @@
             },
             logout: function () {
                 this.$store.commit('logout');
-            }
+            },
         },
         computed: {
             ...mapGetters({
               grid: 'getGrid',
               loggedUser: 'getLoggedUser',
               imageRoot: 'getImageRoot',
-              windowWidth: 'getWindowWidth',
             }),
             user(){ 
                 if(this.loggedUser){

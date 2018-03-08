@@ -17,6 +17,11 @@
 					<img src='../assets/img/like.png'>
 				</button>
 			</transition>
+			<transition name="show">
+				<button v-if="!post.auth_like_id & popupActive && isMobile" class="likeIt" @click="likeIt(index)">
+					<img src='../assets/img/like.png'>
+				</button>
+			</transition>
 
 			<button v-if="popupActive && !isMobile" @click="openComments(index)" class="comment"><img src='../assets/img/comment-icon-white.png' alt=""></button>
 			<button v-else class="comment" @click="openComments(index)"><img src='../assets/img/comment-icon.png' alt=""></button>
@@ -70,9 +75,9 @@
         	openLikesPopup(index){
         		this.$store.dispatch('loadLikes', index)
         	},
-            openComments(index){
+            openComments(index){   
                 this.$store.dispatch('openComments', index) 
-                this.$store.commit('openCommentAdding')              
+                //this.$store.commit('openCommentAdding')          
             },
         	bottomVisible: function(context){
         		if(this.likesPopup){

@@ -29,8 +29,6 @@
 
 <script>
 
-  import {apiDomain, getHeader, userUrl, registerUrl} from '../config'
-
   export default{
     data(){
       return{

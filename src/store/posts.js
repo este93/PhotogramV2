@@ -1,16 +1,17 @@
 // initial state
+import config from '../config.js'
+
 const state = { 
   posts: [],
   nextPage: 1,
   currentPostIndex: '',
   post: {},
-  comments: [],
   photo: null,
   photoUrl: '',
   photoDescription: '',
   showDragTitle: true,
   noPosts: false,
-  loadingPosts: false
+  loadingPosts: false,
 }
 
 // getters
@@ -23,9 +24,6 @@ const getters = {
   },
   getPost: state => {
     return state.post
-  },
-  getComments: state => {
-    return state.comments
   },
   getPhoto: state => {
     return state.photoUrl
@@ -64,9 +62,6 @@ const mutations = {
     state.post = state.posts[index]
     state.currentPostIndex = index
   },
-  setComments: (state, {data}) => {
-    state.comments = data
-  },
   takePhoto: (state, {file, img}) => {
     state.photo = file
     state.photoUrl = img
@@ -75,6 +70,7 @@ const mutations = {
   resetUploading: (state) => {
     state.upload = !state.upload
     state.photoUrl = ''
+    state.photo = ''
     state.description = ''
     state.showDragTitle = true
   },
@@ -87,7 +83,7 @@ const mutations = {
   imagePicked: (state, {img}) => {
     state.showDragTitle = false
     state.photo = img
-  }
+  },
 }
 
 // actions
@@ -99,7 +95,7 @@ const actions = {
       if(rootState.states.grid)
         this.amount = 15;
       else
-        this.amount = 6;                 
+        this.amount = 9;                 
     }
     else this.amount = 12;
     var url = ''
@@ -121,7 +117,6 @@ const actions = {
       }else{
         commit('noPosts')
         commit('setLoadingPosts')
-        console.log('No more posts')
       }
     }, (err) => {
       console.log(err)
@@ -140,60 +135,23 @@ const actions = {
   },
   editPost: function({commit, rootState}, data){
     commit('setLoading')
-    axios.patch('posts/' + data.post_id, {
+    axios.patch(config.postsUrl + data.post_id, {
       thumbnail: '',
       description: data.description
     }).then((response) =>{
       commit('setLoading')
     })      
   },
-  deletePost: function({commit}, index){
+  deletePost: function({commit,dispatch}, index){
     let postId = index
     commit('setLoading')
-    axios.delete('posts/' + postId).then((response) =>{
+    axios.delete(config.postsUrl + postId).then((response) =>{
       commit('setEditPopup')
       commit('setImagePopup')
       commit('setLoading')
+      commit('resetPosts');
+      dispatch('loadPosts', router.currentRoute.params.username);
     }) 
-  },
-  // Comments
-  setComments: function({commit, rootState}, index){
-    let postId = rootState.posts.posts[index].id;
-    return new Promise((resolve, reject) => { 
-      axios.get('/comments/', {
-        params: {
-          post_id: postId,
-          amount: 6,
-          page: 1
-        }
-      }).then((response) =>{
-          commit('setComments', { data: response.data.data})
-          resolve() 
-      })       
-    })     
-  },
-  openComments: function({commit, dispatch}, index){
-    commit('setLoading')
-    return dispatch('setComments', index).then(() => {
-        dispatch('openCommentsPopup', index)
-        commit('setLoading')
-    })
-  },
-  addComment: function({commit, dispatch}, data){ 
-    commit('setLoading')   
-    axios.post('comments/', data).then(response => {
-      return dispatch('setComments', state.currentPostIndex).then(() => {
-          commit('setLoading')
-      })   
-    })
-  },
-  deleteComment: function({commit,dispatch}, commentId){    
-    commit('setLoading')
-    axios.delete('comments/' + commentId).then(response => {
-      return dispatch('setComments', state.currentPostIndex).then(() => {
-          commit('setLoading')
-      })
-    })
   },
   resetPosts: function(context, payload){
     context.commit('resetPosts')
@@ -205,8 +163,10 @@ const actions = {
         commit('setLoading')
     })
   },
+  
   // Uploading of photos
   takePhoto: function({commit, dispatch}, data){
+    commit('setLoading')
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
             bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
@@ -217,19 +177,27 @@ const actions = {
     }
     var file = dataURLtoFile(data.refs, 'image.png');
     commit('takePhoto', {file: file, img: data.refs})
+    commit('setLoading')
   }, 
   uploadPhoto: function({commit, dispatch}, data){
-    commit('setLoading')
-    var formData = new FormData();
+    commit('setLoading')    
+    require('formdata-polyfill')
+    var formData = new FormData()   
     formData.append("image", state.photo);
     formData.append("description", data.description);
-    axios.post('/posts', formData).then(function(){
+    axios.post(config.postsUrl, formData)
+    .then((response) =>{
       commit('setLoading')
       commit('resetUploading')
       dispatch('showUpload');
+      commit('resetPosts');
+      dispatch('loadPosts', router.currentRoute.params.username);
+      document.getElementsByClassName('img-preview')[0].removeAttribute("src");  
+    }).catch(error => {
     })
   },
   imagePicked: function({commit, dispatch}, data){
+    require('formdata-polyfill')
     var formData = new FormData();
     formData.append("image", state.photo);
     var img = event.target.files[0];
@@ -239,7 +207,12 @@ const actions = {
     }
     reader.readAsDataURL(img);
     commit('imagePicked', {img: img})
+  },
+  imagePickedMob: function({commit, dispatch}, data){
+    var file = dataURLtoFile(data.refs, 'image.png');
+    commit('takePhoto', {file: file, img: data.refs})
   }
+  
 }
 
 export default {

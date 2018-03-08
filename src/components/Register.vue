@@ -63,7 +63,6 @@
 <script>
 
   import Vue from 'vue'
-  import {apiDomain, getHeader, userUrl, registerUrl} from '../config'
   import VeeValidate from 'vee-validate';
   import { mapGetters } from 'vuex'
 

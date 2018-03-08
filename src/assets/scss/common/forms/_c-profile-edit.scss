@@ -24,10 +24,10 @@
 			}
 		}
 		&__img{
-			background:black;
+			//background:black;
 			border-radius: 100%;
-			width: 87px;
-			height: 87px;
+			//width: 87px;
+			//height: 87px;
 			margin: auto;
 			margin-bottom: 2.6rem;
 			img{
@@ -36,8 +36,8 @@
 			}
 			@include breakpoint(desktop){
 				margin-bottom: 2.2rem;
-				width: 220px;
-				height: 220px;
+				//width: 220px;
+				//height: 220px;
 			}
 		}
 		&__change{
@@ -91,7 +91,7 @@
 		font-family: Roboto;
 		text-align: center;
 		margin-top: 0.7rem;
-		display: none;
+		//display: none;
 		cursor: pointer;
 		@include breakpoint(desktop){
 			display: block;
@@ -105,4 +105,8 @@
 	    right: 0;
 	    margin: auto;
 	}
+}
+
+.hide{
+	display: none;
 }

@@ -15,16 +15,17 @@
 	    }
 	}
 	&--outer{
-		max-height: 90vH;
-		overflow-Y: scroll;
 	    @include breakpoint(desktop){
 			//height: 200px;
 	    }
 	}
 	&--inner{
 		padding: 24px 17px 50px 17px;
+		overflow-Y: scroll;
+		max-height: 90vH;
 	    @include breakpoint(desktop){
 			padding: 49px 38px;
+			max-height: 80vH;
 	    }
 	}
 	&__single{
@@ -77,6 +78,10 @@
     	line-height: 17px;
 		span{
 			font-family: RobotoBold;
+			a{
+			color: black;
+				
+			}
 		}
 	    @include breakpoint(desktop){
     		font-size: 16px;

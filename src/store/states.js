@@ -1,3 +1,5 @@
+import config from '../config.js'
+
 // initial state
 const state = {    
   title: "",    
@@ -9,9 +11,9 @@ const state = {
   imagePopup: false,
   upload: false,
   loading: false,
-  addCommentPopup: false,     
+  //addCommentPopup: false,     
   isMobile: true, 
-  imageRoot: "http://192.168.0.154:8000/storage/", 
+  imageRoot: config.imageRoot, 
   likesPopup: false,
   grid: false,   // Profile page grid or single image display
 }
@@ -51,9 +53,9 @@ const getters = {
   getImageRoot: function(state){
     return state.imageRoot; 
   },
-  addCommentPopup: function(state){
-    return state.addCommentPopup; 
-  },
+  // addCommentPopup: function(state){
+  //   return state.addCommentPopup; 
+  // },
   likesPopup: function(state){
     return state.likesPopup; 
   },
@@ -97,28 +99,33 @@ const mutations = {
     state.homeIcon = false;
     state.notificationIcon = false;
     state.imagePopup = false
+    state.commentsPopup = false
   },
   headerCloseAll(state, response){
     state.upload = false;
     state.imagePopup = false;
     state.commentsPopup = false;
     state.likesPopup = false
+    state.editPopup = false
   },
   setMobile: (state) => {
     if(document.body.clientWidth > 1024){
       state.isMobile = false
     }
   },
-  openCommentAdding: (state) => {
-    state.addCommentPopup = !state.addCommentPopup;
-  },
-  openCommentsPopup: (state, payload) => {
+  // openCommentAdding: (state) => {
+  //   state.addCommentPopup = !state.addCommentPopup;
+  // },
+  openCommentsPopup: (state, commit) => {
     state.commentsPopup = true;
     state.searchIcon = false;
   },
-  hideComments: (state, payload) => {
+  hideComments: (state, rootState) => {
     state.commentsPopup = false;
-    state.addCommentPopup = false
+    //state.addCommentPopup = false
+    rootState.comments.comments = []
+    rootState.comments.nextPageComments = 1
+    rootState.comments.noComments = false
   },
   showLikesPopup: (state) => {
     state.likesPopup = !state.likesPopup;    
@@ -147,9 +154,9 @@ const actions = {
     context.commit('setSearchIcon');
     context.dispatch('updateTitle', 'Upload');
   },
-  openCommentAdding: function(context){
-    context.commit('openCommentAdding')
-  },  
+  // openCommentAdding: function(context){
+  //   context.commit('openCommentAdding')
+  // },  
   openCommentsPopup: function({commit,dispatch, rootState}, index){
       commit('updateTitle', 'Comments');
       if(Object.keys(rootState.posts.post).length === 0){
@@ -157,8 +164,8 @@ const actions = {
       }
       commit('openCommentsPopup')
   },
-  hideComments: function(context){
-    context.commit('hideComments')
+  hideComments: function({commit, rootState}){
+    commit('hideComments', rootState)
   },
   setHomePage: function(context){
     context.commit('resetIcons');

@@ -1,6 +1,6 @@
 .b-photos{
 	overflow: hidden;
-	margin-top: 2.7rem;
+	margin-top: 22px;
 	display: flex;    
 	flex-flow: wrap;	
     position: relative;
@@ -8,7 +8,7 @@
 		flex-flow: wrap;
 		max-width: 1480px;
 		margin: auto;
-		margin-top: 4.5rem;
+		margin-top: 70px;
     	justify-content: normal;
 	}
 	&-popup{
@@ -19,9 +19,11 @@
 		left: 0;
 		right: 0;
 		padding-bottom: 47px;
-		overflow-y: scroll;
+		overflow: scroll;
 		@include breakpoint(desktop){
 			padding-bottom: 70px;
+			bottom: 0;
+			//max-height: 80vH;
 		}
 		&__back{
 			position: fixed;
@@ -33,14 +35,15 @@
 			}
 		}
 		.o-photo{
-			max-width: 500px;
+			//max-width: 500px;
+			width: 100%;
 		    margin: auto;
 		    margin-top: 3.5vH;
 		    position: relative;
 		    z-index: 1;
 			@include breakpoint(desktop){
-		    	margin-top: 11vH;
-				max-width: 500px;
+		    	margin-top: 7vH;
+				max-width: 700px;
 				width: 100%;
 			    &__comments__txt, &__comments__all{
 					color: white;
@@ -58,7 +61,7 @@
 		    	}
 		    }
 		    &__img{
-		    	max-width: 500px;
+		    	max-width: 100%;
 		    }
 		}
 		.b-comments{
