@@ -27,7 +27,7 @@ Vue.use(VueResource)
 Vue.component('app-header', Header)
 
 global.router = new VueRouter({
-    mode: 'history',
+    //mode: 'history',
     routes: Routes
 })
 
